@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Laboratorium interaktif untuk mempelajari dan menghitung operasi pada himpunan fuzzy.">
+  <title>FuzzyLab — Operasi Himpunan Fuzzy</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Lewati ke konten</a>
+  <header class="site-header">
+    <a class="brand" href="#beranda" aria-label="FuzzyLab, kembali ke beranda">
+      <span class="brand-mark" aria-hidden="true">μ</span>
+      <span>Fuzzy<span>Lab</span></span>
+    </a>
+    <nav aria-label="Navigasi utama">
+      <a href="#teori">Teori</a>
+      <a href="#kalkulator">Kalkulator</a>
+      <a href="#latihan">Latihan</a>
+    </nav>
+    <a class="header-cta" href="#kalkulator">Mulai hitung <span aria-hidden="true">→</span></a>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="beranda">
+      <div class="hero-copy">
+        <p class="eyebrow"><span></span> Suplemen Week 2 · Pemodelan Fuzzy</p>
+        <h1>Operasi fuzzy,<br><em>terlihat logikanya.</em></h1>
+        <p class="hero-lead">Bukan sekadar hasil akhir. Masukkan data sendiri, pilih operasi, lalu ikuti perhitungan setiap elemen sampai tuntas.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#kalkulator">Buka kalkulator <span aria-hidden="true">↗</span></a>
+          <a class="button ghost" href="#teori">Pelajari dasar</a>
+        </div>
+        <div class="hero-meta" aria-label="Ringkasan fitur">
+          <div><strong>13</strong><span>operasi</span></div>
+          <div><strong>100%</strong><span>langkah terbuka</span></div>
+          <div><strong>∞</strong><span>soal acak</span></div>
+        </div>
+      </div>
+      <div class="hero-visual" aria-label="Ilustrasi derajat keanggotaan fuzzy">
+        <div class="visual-top">
+          <span>DERAJAT KEANGGOTAAN</span>
+          <span class="live-pill"><i></i> Interaktif</span>
+        </div>
+        <div class="membership-orbit">
+          <div class="orbit orbit-one"></div>
+          <div class="orbit orbit-two"></div>
+          <div class="mu-core">μ<small>(x)</small><strong id="hero-mu">0.72</strong></div>
+          <span class="orbit-label label-zero">0</span>
+          <span class="orbit-label label-one">1</span>
+        </div>
+        <div class="visual-slider">
+          <label for="concept-slider"><span>tidak termasuk</span><span>termasuk penuh</span></label>
+          <input id="concept-slider" type="range" min="0" max="1" step="0.01" value="0.72">
+        </div>
+        <p><span id="concept-value">0.72</span> berarti objek memiliki derajat keanggotaan <strong id="concept-percent">72%</strong>—bukan probabilitas 72%.</p>
+      </div>
+    </section>
+
+    <section class="section theory-section" id="teori">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow"><span></span> 01 · Landasan</p>
+          <h2>Dari batas tegas ke <em>derajat</em></h2>
+        </div>
+        <p>Dalam himpunan klasik, keanggotaan hanya 0 atau 1. Himpunan fuzzy memperluasnya menjadi semua nilai pada interval [0, 1].</p>
+      </div>
+
+      <div class="compare-grid">
+        <article class="compare-card crisp-card">
+          <div class="card-kicker">HIMPUNAN KLASIK</div>
+          <h3>Keputusan biner</h3>
+          <p>Objek hanya berada di dalam atau di luar himpunan.</p>
+          <div class="binary-row"><span>0</span><div class="binary-track"><i></i></div><span>1</span></div>
+          <code>μ<sub>A</sub>(x) ∈ {0, 1}</code>
+        </article>
+        <article class="compare-card fuzzy-card">
+          <div class="card-kicker">HIMPUNAN FUZZY</div>
+          <h3>Keputusan gradual</h3>
+          <p>Objek boleh menjadi anggota dengan derajat tertentu.</p>
+          <div class="gradient-row"><span>0</span><div></div><span>1</span></div>
+          <code>μ<sub>A</sub>(x) ∈ [0, 1]</code>
+        </article>
+        <aside class="note-card">
+          <span class="note-icon">!</span>
+          <div><strong>Ingat</strong><p>μ<sub>A</sub>(x)=0,7 menyatakan seberapa kuat x cocok dengan konsep A, bukan peluang kejadian sebesar 70%.</p></div>
+        </aside>
+      </div>
+
+      <div class="formula-intro">
+        <div>
+          <p class="eyebrow"><span></span> Operator Zadeh</p>
+          <h3>Rumus inti, satu elemen pada satu waktu</h3>
+        </div>
+        <p>Untuk setiap x pada semesta X, operasi dilakukan langsung terhadap nilai μ<sub>A</sub>(x) dan μ<sub>B</sub>(x).</p>
+      </div>
+      <div class="formula-grid">
+        <article class="formula-card accent-orange">
+          <span class="formula-number">01</span><div class="formula-symbol">A<sup>c</sup></div>
+          <h4>Komplemen</h4><code>μ<sub>Aᶜ</sub>(x) = 1 − μ<sub>A</sub>(x)</code>
+          <p>Mengukur derajat “bukan A”.</p>
+        </article>
+        <article class="formula-card accent-blue">
+          <span class="formula-number">02</span><div class="formula-symbol">A ∩ B</div>
+          <h4>Irisan</h4><code>μ<sub>A∩B</sub>(x) = min(μ<sub>A</sub>, μ<sub>B</sub>)</code>
+          <p>Ambil keanggotaan yang lebih kecil.</p>
+        </article>
+        <article class="formula-card accent-green">
+          <span class="formula-number">03</span><div class="formula-symbol">A ∪ B</div>
+          <h4>Union</h4><code>μ<sub>A∪B</sub>(x) = max(μ<sub>A</sub>, μ<sub>B</sub>)</code>
+          <p>Ambil keanggotaan yang lebih besar.</p>
+        </article>
+        <article class="formula-card accent-purple">
+          <span class="formula-number">04</span><div class="formula-symbol">A − B</div>
+          <h4>Selisih</h4><code>μ<sub>A−B</sub>(x) = min(μ<sub>A</sub>, 1−μ<sub>B</sub>)</code>
+          <p>Bagian A yang bukan anggota B.</p>
+        </article>
+      </div>
+
+      <details class="law-panel">
+        <summary><span>Hukum dan operator lanjutan</span><span class="summary-hint">Buka ringkasan <b>+</b></span></summary>
+        <div class="law-content">
+          <div><strong>Idempoten</strong><code>A ∪ A = A &nbsp;·&nbsp; A ∩ A = A</code></div>
+          <div><strong>Komutatif</strong><code>A ∪ B = B ∪ A &nbsp;·&nbsp; A ∩ B = B ∩ A</code></div>
+          <div><strong>Asosiatif</strong><code>(A ∪ B) ∪ C = A ∪ (B ∪ C)</code></div>
+          <div><strong>De Morgan</strong><code>(A ∪ B)<sup>c</sup> = A<sup>c</sup> ∩ B<sup>c</sup></code></div>
+          <div><strong>Produk aljabar</strong><code>μ = μ<sub>A</sub> · μ<sub>B</sub></code></div>
+          <div><strong>Jumlah probabilistik</strong><code>μ = μ<sub>A</sub> + μ<sub>B</sub> − μ<sub>A</sub>μ<sub>B</sub></code></div>
+        </div>
+      </details>
+    </section>
+
+    <section class="section lab-section" id="kalkulator">
+      <div class="section-heading light-heading">
+        <div><p class="eyebrow"><span></span> 02 · Eksperimen</p><h2>Laboratorium <em>operasi</em></h2></div>
+        <p>Susun semesta, isi derajat keanggotaan, pilih satu atau beberapa operasi, lalu lihat hasil dan alasan di baliknya.</p>
+      </div>
+
+      <div class="lab-shell">
+        <div class="lab-input-panel">
+          <div class="panel-title-row">
+            <div><span class="step-badge">1</span><h3>Masukkan himpunan</h3></div>
+            <button class="text-button" id="load-example" type="button">Muat contoh Week 2</button>
+          </div>
+          <div class="input-help"><span>Format</span> Setiap baris mewakili elemen x dengan μ<sub>A</sub>(x) dan μ<sub>B</sub>(x) dalam rentang 0–1.</div>
+          <div class="data-table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Elemen x</th><th>μ<sub>A</sub>(x)</th><th>μ<sub>B</sub>(x)</th><th><span class="sr-only">Aksi</span></th></tr></thead>
+              <tbody id="data-rows"></tbody>
+            </table>
+          </div>
+          <div class="table-actions">
+            <button class="mini-button" id="add-row" type="button"><span>＋</span> Tambah elemen</button>
+            <button class="mini-button" id="open-import" type="button"><span>⇩</span> Tempel data</button>
+            <button class="mini-button danger-text" id="clear-rows" type="button">Kosongkan</button>
+          </div>
+          <div class="import-box" id="import-box" hidden>
+            <label for="bulk-data">Satu baris: <code>elemen, μA, μB</code></label>
+            <textarea id="bulk-data" rows="5" placeholder="x1, 0.2, 0.7&#10;x2, 0.8, 0.4"></textarea>
+            <div><button class="mini-button filled" id="apply-import" type="button">Gunakan data</button><button class="mini-button" id="cancel-import" type="button">Batal</button></div>
+          </div>
+
+          <div class="operation-heading"><span class="step-badge">2</span><h3>Pilih operasi</h3><small>Boleh lebih dari satu</small></div>
+          <div class="operation-options" id="operation-options"></div>
+          <div class="validation-message" id="validation-message" role="alert" hidden></div>
+          <button class="calculate-button" id="calculate" type="button"><span>Hitung & jelaskan</span><span aria-hidden="true">→</span></button>
+        </div>
+
+        <div class="lab-output-panel" id="results-panel">
+          <div class="empty-state" id="empty-state">
+            <div class="empty-graphic"><span>μ</span><i></i><i></i><i></i></div>
+            <h3>Hasil akan muncul di sini</h3>
+            <p>Isi data dan pilih operasi. Setiap hasil dilengkapi notasi himpunan, grafik, dan perhitungan per elemen.</p>
+          </div>
+          <div id="results" hidden></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section practice-section" id="latihan">
+      <div class="section-heading">
+        <div><p class="eyebrow"><span></span> 03 · Uji pemahaman</p><h2>Latihan yang <em>jujur</em></h2></div>
+        <p>Buat soal baru tanpa batas. Pemeriksa menandai setiap elemen—jadi kamu tahu persis bagian yang benar dan yang perlu diperbaiki.</p>
+      </div>
+
+      <div class="practice-layout">
+        <aside class="practice-settings">
+          <div class="settings-head"><span>Generator soal</span><span class="status-dot">AKTIF</span></div>
+          <label for="difficulty">Tingkat kesulitan</label>
+          <select id="difficulty">
+            <option value="dasar">Dasar · min, max, komplemen</option>
+            <option value="menengah" selected>Menengah · operasi campuran</option>
+            <option value="tantangan">Tantangan · De Morgan</option>
+          </select>
+          <label for="element-count">Jumlah elemen <output id="element-count-output">5</output></label>
+          <input id="element-count" type="range" min="3" max="8" value="5">
+          <button class="button primary full" id="new-question" type="button">Generate soal baru <span>↻</span></button>
+          <div class="score-box">
+            <div><small>Dikerjakan</small><strong id="attempt-count">0</strong></div>
+            <div><small>Rata-rata</small><strong id="average-score">—</strong></div>
+          </div>
+        </aside>
+
+        <article class="question-card">
+          <div class="question-top"><span id="question-level">MENENGAH</span><span id="question-number">SOAL #001</span></div>
+          <h3 id="question-prompt">Tentukan hasil operasi A ∩ B.</h3>
+          <div class="given-sets" id="given-sets"></div>
+          <p class="answer-label">Masukkan derajat keanggotaan hasil:</p>
+          <div class="answer-grid" id="answer-grid"></div>
+          <div class="question-actions">
+            <button class="check-button" id="check-answer" type="button">Periksa jawaban</button>
+            <button class="mini-button" id="fill-mixed" type="button">Isi simulasi benar/salah</button>
+            <button class="mini-button" id="show-hint" type="button">Petunjuk</button>
+            <button class="mini-button" id="show-solution" type="button">Lihat solusi</button>
+          </div>
+          <div class="hint-box" id="hint-box" hidden></div>
+          <div class="feedback-box" id="feedback-box" aria-live="polite" hidden></div>
+          <div class="solution-box" id="solution-box" hidden></div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <a class="brand footer-brand" href="#beranda"><span class="brand-mark">μ</span><span>Fuzzy<span>Lab</span></span></a>
+    <p>Suplemen interaktif · Week 2 · Dari himpunan klasik ke himpunan fuzzy</p>
+    <a href="#beranda">Kembali ke atas ↑</a>
+  </footer>
+
+  <template id="row-template">
+    <tr>
+      <td><input class="element-input" type="text" aria-label="Nama elemen" maxlength="20"></td>
+      <td><input class="membership-input a-input" type="number" min="0" max="1" step="0.01" aria-label="Derajat keanggotaan A"></td>
+      <td><input class="membership-input b-input" type="number" min="0" max="1" step="0.01" aria-label="Derajat keanggotaan B"></td>
+      <td><button class="remove-row" type="button" title="Hapus baris" aria-label="Hapus baris">×</button></td>
+    </tr>
+  </template>
+  <script src="app.js"></script>
+</body>
+</html>
