@@ -87,9 +87,10 @@ const OPERATIONS = {
 
 const CORE_OPERATION_KEYS = ["complementA", "complementB", "intersection", "union", "differenceAB", "differenceBA"];
 const ADVANCED_OPERATION_KEYS = ["symmetric", "algebraicProduct", "algebraicSum", "boundedSum", "boundedDifference", "deMorganUnion", "deMorganIntersection"];
-const weekTwoExample = [
-  ["1", 0, 0], ["2", .1, .5], ["3", .4, .4], ["4", .5, .3],
-  ["5", .6, .5], ["6", .9, .8], ["7", 1, 1], ["8", 1, 0]
+const weekTwoExercise = [
+  ["a01", 0, 0], ["a252", 0, .5], ["b606", .3, 0], ["b51", .5, 0],
+  ["C71", 0, .6], ["C99", 0, .9], ["GA123", 1, .3], ["QG815", .9, .2],
+  ["SQ911", .8, 0], ["M250", .5, .6]
 ];
 
 const rowsBody = document.querySelector("#data-rows");
@@ -116,7 +117,7 @@ function setRows(rows) {
 function renderOperationOptions() {
   const group = (title, keys) => `<div class="sr-only">${title}</div>` + keys.map(key => {
     const op = OPERATIONS[key];
-    const checked = ["intersection", "union"].includes(key) ? "checked" : "";
+    const checked = ["complementA", "complementB", "intersection", "union"].includes(key) ? "checked" : "";
     return `<div class="op-option"><input type="checkbox" id="op-${key}" value="${key}" ${checked}><label for="op-${key}"><span class="op-symbol">${op.symbol}</span><span class="op-copy"><strong>${op.name}</strong><small>${op.short}</small></span></label></div>`;
   }).join("");
   operationsEl.innerHTML = group("Operasi inti", CORE_OPERATION_KEYS) + `<details class="advanced-options"><summary>Operator lanjutan <span>＋</span></summary><div class="advanced-grid">${group("Operasi lanjutan", ADVANCED_OPERATION_KEYS)}</div></details>`;
@@ -202,7 +203,13 @@ rowsBody.addEventListener("click", event => {
 });
 document.querySelector("#add-row").addEventListener("click", () => addRow(`x${rowsBody.children.length + 1}`, "", ""));
 document.querySelector("#clear-rows").addEventListener("click", () => setRows([["x1", "", ""]]));
-document.querySelector("#load-example").addEventListener("click", () => setRows(weekTwoExample));
+document.querySelector("#load-example").addEventListener("click", () => {
+  setRows(weekTwoExercise);
+  operationsEl.querySelectorAll("input").forEach(input => {
+    input.checked = ["complementA", "complementB", "intersection", "union"].includes(input.value);
+  });
+  validationEl.hidden = true;
+});
 document.querySelector("#calculate").addEventListener("click", calculate);
 document.querySelector("#open-import").addEventListener("click", () => { document.querySelector("#import-box").hidden = false; document.querySelector("#bulk-data").focus(); });
 document.querySelector("#cancel-import").addEventListener("click", () => { document.querySelector("#import-box").hidden = true; });
@@ -334,6 +341,6 @@ document.querySelector("#show-solution").addEventListener("click", () => {
 });
 
 renderOperationOptions();
-setRows(weekTwoExample);
+setRows(weekTwoExercise);
 generateQuestion();
 updateStats();

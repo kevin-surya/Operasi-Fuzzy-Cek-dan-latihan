@@ -16,7 +16,7 @@ npx serve .
 
 - Ringkasan teori himpunan klasik dan fuzzy.
 - Kalkulator 13 operasi dengan data buatan sendiri dan pilihan beberapa operasi sekaligus.
-- Contoh angka Week 2 yang dapat dimuat satu klik.
+- Data latihan soal Week 2 tentang himpunan fuzzy pesawat penumpang dan muatan yang dapat dimuat satu klik.
 - Grafik hasil dan perhitungan langkah demi langkah untuk setiap elemen.
 - Impor data tempel dan ekspor hasil ke CSV.
 - Generator latihan tiga tingkat kesulitan.
